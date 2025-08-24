@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>첫인상, 개인에서 도시까지 — 음악과 함께 읽는 에세이</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --text: #e5e7eb;
+      --muted: #9aa1aa;
+      --accent: #f5d259;
+      --border: #232833;
+    }
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, "Malgun Gothic", sans-serif;
+      background: linear-gradient(180deg, #0f1115 0%, #0c0e12 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(6px);
+      background: rgba(15,17,21,0.6);
+      border-bottom: 1px solid #22262e;
+    }
+    header .inner { max-width: 900px; margin: 0 auto; padding: 12px 24px; }
+
+    /* YouTube 플레이어 */
+    .iframe-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .iframe-wrapper iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+
+    /* 본문 카드 */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      margin-top: 18px;
+    }
+    .subtitle { color: var(--muted); margin: 0 0 8px; font-size: 14px; text-align: center; }
+    .title { font-size: 28px; line-height: 1.25; margin: 6px 0 14px; text-align: center; }
+
+    /* 읽기 편한 본문 레이아웃 */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;             /* 가운데 배치 */
+      text-align: center;         /* 텍스트 가운데 정렬 */
+      line-height: 2;             /* 줄 간격 넉넉하게 */
+      font-size: 18px;            /* 글자 약간 키움 */
+      letter-spacing: 0.1px;
+    }
+    .content p { margin: 22px 0; }
+
+    .note { color: var(--muted); font-size: 13px; }
+
+    .footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .content { font-size: 17px; line-height: 1.95; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header aria-label="상단 음악 플레이어">
+    <div class="inner">
+      <div class="iframe-wrapper" aria-label="YouTube 플레이어: My Soul - The Cancel">
+        <!-- My Soul - The Cancel (YouTube Embed) -->
+        <iframe
+          src="https://www.youtube.com/embed/Ln4lwQAP3wM"
+          title="My Soul - The Cancel — YouTube player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <article class="card" aria-label="읽을 수 있는 본문">
+      <p class="subtitle">에세이</p>
+      <h1 class="title">첫인상, 개인에서 도시까지</h1>
+      <div class="content" id="article">
+        <p>인천공항에서 서울로 돌아오며 영종대교를 건넜다. <br> 다리 건너로 보이는 청라지구를 보며 생각했다. <br> 한때 ‘유령도시’라 불리던 이곳은 왜 만들어졌을까.</p>
+        <p>곧바로 첫인상이 떠올랐다. 사람은 외모를 가꾸고, 목소리를 다듬고, 향을 바꾼다. <br> 그만큼 보이는 얼굴이 중요하다는 뜻이다. <br> 그런데 길바닥에 버려진 쓰레기 앞에서는 그 논리가 쉽게 무너진다.</p>
+        <p>외국인의 눈에 비친 한국은 인천공항에서 시작된다. <br> 그리고 다리를 건너 가장 먼저 마주하는 도시의 풍경이 그 인상을 좌우한다. <br> 그런 의미에서 청라는 ‘대한민국의 첫 얼굴’에 기여하고 있다.</p>
+        <p>질문은 결국 나로 돌아온다. 내가 사는 집은 타인에게 어떤 인상을 줄까. <br> 나는 어떤 사람으로 기억될까. 답은 단순하다. 깔끔함. 정리하고, 갈고 닦는 태도다.</p>
+        <p>‘실패’라는 단어에 마음이 흔들린다면, 나의 기준을 점검해볼 일이다. <br>  내가 내린 선택이 정말 나의 선택이라 말할 수 있을까. <br> 그 질문에 답하는 순간, 첫인상은 이미 달라져 있을 것이다.</p>
+      </div>
+    </article>
+
+    <section class="card footer" aria-label="바닥글">
+      <div class="note">© WePlaceMarketing</div>
+      <div class="note">배경 음악: <strong>My Soul – The Cancel</strong> (YouTube 임베드)</div>
+    </section>
+  </main>
+</body>
+</html>
