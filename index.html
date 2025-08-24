@@ -60,11 +60,13 @@
     /* 읽기 편한 본문 레이아웃 */
     .content {
       max-width: 680px;
-      margin: 0 auto;             /* 가운데 배치 */
-      text-align: center;         /* 텍스트 가운데 정렬 */
-      line-height: 2;             /* 줄 간격 넉넉하게 */
-      font-size: 18px;            /* 글자 약간 키움 */
+      margin: 0 auto;                 /* 가운데 배치 (레이아웃) */
+      text-align: justify;            /* 문단 양쪽 맞춤 */
+      text-justify: inter-word;       /* 단어 간 여백으로 정렬 */
+      line-height: 1.95;              /* 줄 간격 */
+      font-size: 18px;
       letter-spacing: 0.1px;
+      word-break: keep-all;           /* 한국어 단어 잘림 방지 */
     }
     .content p { margin: 22px 0; }
 
@@ -74,8 +76,16 @@
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
 
-    @media (max-width: 480px) {
-      .content { font-size: 17px; line-height: 1.95; }
+    /* 모바일에 최적화 */
+    @media (max-width: 768px) {
+      .container { padding: 18px; }
+      .card { padding: 26px 20px; }
+      .title { font-size: 24px; }
+      .content { font-size: 17px; line-height: 1.9; padding: 0 4px; }
+      .content p { margin: 18px 0; }
+    }
+    @media (max-width: 420px) {
+      .content { font-size: 16.5px; line-height: 1.9; padding: 0 2px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -104,11 +114,11 @@
       <p class="subtitle">에세이</p>
       <h1 class="title">첫인상, 개인에서 도시까지</h1>
       <div class="content" id="article">
-        <p>인천공항에서 서울로 돌아오며 영종대교를 건넜다. <br> 다리 건너로 보이는 청라지구를 보며 생각했다. <br> 한때 ‘유령도시’라 불리던 이곳은 왜 만들어졌을까.</p>
-        <p>곧바로 첫인상이 떠올랐다. 사람은 외모를 가꾸고, 목소리를 다듬고, 향을 바꾼다. <br> 그만큼 보이는 얼굴이 중요하다는 뜻이다. <br> 그런데 길바닥에 버려진 쓰레기 앞에서는 그 논리가 쉽게 무너진다.</p>
-        <p>외국인의 눈에 비친 한국은 인천공항에서 시작된다. <br> 그리고 다리를 건너 가장 먼저 마주하는 도시의 풍경이 그 인상을 좌우한다. <br> 그런 의미에서 청라는 ‘대한민국의 첫 얼굴’에 기여하고 있다.</p>
-        <p>질문은 결국 나로 돌아온다. 내가 사는 집은 타인에게 어떤 인상을 줄까. <br> 나는 어떤 사람으로 기억될까. 답은 단순하다. 깔끔함. 정리하고, 갈고 닦는 태도다.</p>
-        <p>‘실패’라는 단어에 마음이 흔들린다면, 나의 기준을 점검해볼 일이다. <br>  내가 내린 선택이 정말 나의 선택이라 말할 수 있을까. <br> 그 질문에 답하는 순간, 첫인상은 이미 달라져 있을 것이다.</p>
+        <p>인천공항에서 서울로 돌아오며 영종대교를 건넜다. 다리 건너로 보이는 청라지구를 보며 생각했다. 한때 ‘유령도시’라 불리던 이곳은 왜 만들어졌을까.</p>
+        <p>곧바로 첫인상이 떠올랐다. 사람은 외모를 가꾸고, 목소리를 다듬고, 향을 바꾼다. 그만큼 보이는 얼굴이 중요하다는 뜻이다. 그런데 길바닥에 버려진 쓰레기 앞에서는 그 논리가 쉽게 무너진다.</p>
+        <p>외국인의 눈에 비친 한국은 인천공항에서 시작된다. 그리고 다리를 건너 가장 먼저 마주하는 도시의 풍경이 그 인상을 좌우한다. 그런 의미에서 청라는 ‘대한민국의 첫 얼굴’에 기여하고 있다.</p>
+        <p>질문은 결국 나로 돌아온다. 내가 사는 집은 타인에게 어떤 인상을 줄까. 나는 어떤 사람으로 기억될까. 답은 단순하다. 깔끔함. 정리하고, 갈고 닦는 태도다.</p>
+        <p>‘실패’라는 단어에 마음이 흔들린다면, 나의 기준을 점검해볼 일이다. 내가 내린 선택이 정말 나의 선택이라 말할 수 있을까. 그 질문에 답하는 순간, 첫인상은 이미 달라져 있을 것이다.</p>
       </div>
     </article>
 
