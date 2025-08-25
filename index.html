@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>첫인상, 개인에서 도시까지 — 음악과 함께 읽는 에세이</title>
   <style>
+    /* ===== THEME TOKENS ===== */
     :root {
       --bg: #0f1115;
       --card: #171a21;
@@ -12,63 +13,96 @@
       --muted: #9aa1aa;
       --accent: #f5d259;
       --border: #232833;
+      --shadow: rgba(0,0,0,0.35);
     }
+    [data-theme="light"] {
+      --bg: #f7f7f9;
+      --card: #ffffff;
+      --text: #0f1115;
+      --muted: #5a6572;
+      --accent: #f5d259;
+      --border: #e5e7eb;
+      --shadow: rgba(0,0,0,0.08);
+    }
+
     html, body { height: 100%; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, "Malgun Gothic", sans-serif;
-      background: linear-gradient(180deg, #0f1115 0%, #0c0e12 100%);
+      background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    .container { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .container { max-width: 980px; margin: 0 auto; padding: 20px; }
+
+    /* ===== HEADER (sticky) ===== */
     header {
       position: sticky; top: 0; z-index: 10;
-      backdrop-filter: blur(6px);
-      background: rgba(15,17,21,0.6);
-      border-bottom: 1px solid #22262e;
+      backdrop-filter: blur(8px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      border-bottom: 1px solid var(--border);
     }
-    header .inner { max-width: 900px; margin: 0 auto; padding: 12px 24px; }
+    header .inner {
+      max-width: 980px; margin: 0 auto; padding: 10px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      flex-wrap: wrap;
+    }
 
-    /* YouTube 플레이어 */
+    /* Theme toggle */
+    .toggle-group { display:flex; align-items:center; gap:10px; }
+    .toggle-label { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    .btn {
+      appearance: none; border: 1px solid var(--border); background: var(--card);
+      color: var(--text); border-radius: 999px; padding: 8px 12px; cursor: pointer; font-weight: 600;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    /* ===== YOUTUBE (smaller, centered) ===== */
+    .iframe-shell { display:flex; justify-content:center; flex: 1 1 100%; order: -1; }
     .iframe-wrapper {
       position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
+      width: 100%;
+      max-width: 420px;               /* smaller player */
+      aspect-ratio: 16 / 9;
       overflow: hidden;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 20px var(--shadow);
+      background: #000;
     }
-    .iframe-wrapper iframe {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
-    }
+    .iframe-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-    /* 본문 카드 */
+    /* ===== CARD ===== */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 32px 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      margin-top: 18px;
+      box-shadow: 0 10px 30px var(--shadow);
+      margin-top: 16px;
     }
-    .subtitle { color: var(--muted); margin: 0 0 8px; font-size: 14px; text-align: center; }
-    .title { font-size: 28px; line-height: 1.25; margin: 6px 0 14px; text-align: center; }
+    .subtitle { color: var(--muted); margin: 0 0 6px; font-size: 14px; text-align: center; }
+    .title { font-size: 26px; line-height: 1.25; margin: 6px 0 10px; text-align: center; }
 
-    /* 읽기 편한 본문 레이아웃 */
-    .content {
-      max-width: 680px;
-      margin: 0 auto;                 /* 가운데 배치 (레이아웃) */
-      text-align: justify;            /* 문단 양쪽 맞춤 */
-      text-justify: inter-word;       /* 단어 간 여백으로 정렬 */
-      line-height: 1.95;              /* 줄 간격 */
+    /* ===== POEM LAYOUT (centered lines) ===== */
+    .poem {
+      max-width: 600px;               /* generous side margins */
+      margin: 0 auto;
+      padding: 0 8px;
+      line-height: 2.15;
       font-size: 18px;
       letter-spacing: 0.1px;
-      word-break: keep-all;           /* 한국어 단어 잘림 방지 */
+      word-break: keep-all;
+      text-align: center;             /* center align each line */
     }
-    .content p { margin: 22px 0; }
+    .poem p { margin: 12px 0; }
+
+    .separator {
+      margin: 18px auto;
+      height: 1px; width: 60%;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
 
     .note { color: var(--muted); font-size: 13px; }
 
@@ -76,16 +110,17 @@
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
 
-    /* 모바일에 최적화 */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .container { padding: 18px; }
+      .container { padding: 16px; }
       .card { padding: 26px 20px; }
-      .title { font-size: 24px; }
-      .content { font-size: 17px; line-height: 1.9; padding: 0 4px; }
-      .content p { margin: 18px 0; }
+      .title { font-size: 22px; }
+      .poem { max-width: 520px; font-size: 17px; line-height: 2.05; }
+      .separator { width: 72%; }
     }
     @media (max-width: 420px) {
-      .content { font-size: 16.5px; line-height: 1.9; padding: 0 2px; }
+      .poem { max-width: 92vw; font-size: 16.5px; line-height: 2.0; }
+      .iframe-wrapper { max-width: 92vw; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -94,17 +129,25 @@
   </style>
 </head>
 <body>
-  <header aria-label="상단 음악 플레이어">
+  <header aria-label="상단 영역">
     <div class="inner">
-      <div class="iframe-wrapper" aria-label="YouTube 플레이어: My Soul - The Cancel">
-        <!-- My Soul - The Cancel (YouTube Embed) -->
-        <iframe
-          src="https://www.youtube.com/embed/Ln4lwQAP3wM"
-          title="My Soul - The Cancel — YouTube player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
+      <!-- Right-side controls -->
+      <div class="toggle-group" aria-label="테마 밝기 조절">
+        <span class="toggle-label">밝기 조절</span>
+        <button id="themeToggle" class="btn" aria-label="테마 전환">🌙 다크</button>
+      </div>
+
+      <!-- Centered small YouTube player -->
+      <div class="iframe-shell">
+        <div class="iframe-wrapper" aria-label="YouTube 플레이어: My Soul - The Cancel">
+          <iframe
+            src="https://www.youtube.com/embed/Ln4lwQAP3wM"
+            title="My Soul - The Cancel — YouTube player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
       </div>
     </div>
   </header>
@@ -113,12 +156,64 @@
     <article class="card" aria-label="읽을 수 있는 본문">
       <p class="subtitle">에세이</p>
       <h1 class="title">첫인상, 개인에서 도시까지</h1>
-      <div class="content" id="article">
-        <p>인천공항에서 서울로 돌아오며 영종대교를 건넜다. 다리 건너로 보이는 청라지구를 보며 생각했다. 한때 ‘유령도시’라 불리던 이곳은 왜 만들어졌을까.</p>
-        <p>곧바로 첫인상이 떠올랐다. 사람은 외모를 가꾸고, 목소리를 다듬고, 향을 바꾼다. 그만큼 보이는 얼굴이 중요하다는 뜻이다. 그런데 길바닥에 버려진 쓰레기 앞에서는 그 논리가 쉽게 무너진다.</p>
-        <p>외국인의 눈에 비친 한국은 인천공항에서 시작된다. 그리고 다리를 건너 가장 먼저 마주하는 도시의 풍경이 그 인상을 좌우한다. 그런 의미에서 청라는 ‘대한민국의 첫 얼굴’에 기여하고 있다.</p>
-        <p>질문은 결국 나로 돌아온다. 내가 사는 집은 타인에게 어떤 인상을 줄까. 나는 어떤 사람으로 기억될까. 답은 단순하다. 깔끔함. 정리하고, 갈고 닦는 태도다.</p>
-        <p>‘실패’라는 단어에 마음이 흔들린다면, 나의 기준을 점검해볼 일이다. 내가 내린 선택이 정말 나의 선택이라 말할 수 있을까. 그 질문에 답하는 순간, 첫인상은 이미 달라져 있을 것이다.</p>
+
+      <div class="poem" id="article">
+        <p>인천공항에 다녀왔습니다.</p>
+        <p>오는길에 이런 생각이 들더군요.</p>
+        <p>인천 → 서울 방향의 영종대교를 건너오니</p>
+        <p>건너편에 청라지구가 보이더군요.</p>
+
+        <p>청라지구는 왜 만들어진 걸까.</p>
+        <p>송도와 청라는 유령도시라는 이야기가 자자하던데.</p>
+
+        <div class="separator" role="separator" aria-hidden="true"></div>
+
+        <p>매번 생각했습니다.</p>
+        <p>“첫인상이 얼마나 중요한지”에 대하여.</p>
+
+        <p>외모를 가꾸고</p>
+        <p>목소리를 다듬고</p>
+        <p>향을 바꾸는데</p>
+        <p>담배꽁초는 왜 바닥에 버리는지</p>
+
+        <div class="separator" role="separator" aria-hidden="true"></div>
+
+        <p>외국인들이 보았을 때 한국은,</p>
+        <p>인천공항의 깔끔함부터 시작하여,</p>
+        <p>청라와 같은 대교를 지나며 보이는 첫 도시에 의해</p>
+        <p>결정되겠구나.</p>
+
+        <p>나는 과연 내가 살고 있는</p>
+        <p>이곳 대한민국의 어떤 인상에 기여할까.</p>
+        <p>우리 집은 타인에게 어떻게 보일까.</p>
+        <p>내가 뭘 하면 매력적인 사람으로 보일까.</p>
+        <p>내 마음속은 어떤 상태일까.</p>
+
+        <div class="separator" role="separator" aria-hidden="true"></div>
+
+        <p>제가 내린 결론은 이겁니다.</p>
+        <p>“깔끔한 사람.”</p>
+        <p>정리하고, 갈고 닦고.</p>
+
+        <div class="separator" role="separator" aria-hidden="true"></div>
+
+        <p>사실은 실패를 위해 만들어진 곳,</p>
+        <p>대한민국의 첫 인상을 위한 곳이 “청라”구나.</p>
+        <p>이런 생각을 했습니다.</p>
+        <p>그 목적에 알맞게 ‘성공’한 지역이</p>
+        <p>청라지구라고 생각합니다.</p>
+
+        <div class="separator" role="separator" aria-hidden="true"></div>
+
+        <p>만약 ‘실패’라는 단어에 감정적 동요로</p>
+        <p>글을 읽어봐야지 마음먹고선</p>
+        <p>끝까지 읽고 계시다면,</p>
+        <p>한번 본인이 어떤 기준을 살아가고 계신지</p>
+        <p>생각해보면 좋겠습니다.</p>
+
+        <p>“본인이 선택하는 게 모두</p>
+        <p>내가 내린 선택이라고</p>
+        <p>확신할 수 있는가.”</p>
       </div>
     </article>
 
@@ -127,5 +222,24 @@
       <div class="note">배경 음악: <strong>My Soul – The Cancel</strong> (YouTube 임베드)</div>
     </section>
   </main>
+
+  <script>
+    // Theme toggle with localStorage
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const KEY = 'wpm-theme';
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'light' || saved === 'dark') {
+      root.setAttribute('data-theme', saved);
+      toggle.textContent = saved === 'dark' ? '🌙 다크' : '☀️ 라이트';
+    }
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem(KEY, next);
+      toggle.textContent = next === 'dark' ? '🌙 다크' : '☀️ 라이트';
+    });
+  </script>
 </body>
 </html>
