@@ -1,245 +1,107 @@
-<!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<!doctype html>
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>첫인상, 개인에서 도시까지 — 음악과 함께 읽는 에세이</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Live Anywhere — Mashcore</title>
+  <meta name="description" content="어디서 사느냐는 정말 중요하다. 환경이 바뀌면 생각이 바뀌고, 결국 내가 바뀐다." />
   <style>
-    /* ===== THEME TOKENS ===== */
-    :root {
-      --bg: #0f1115;
-      --card: #171a21;
-      --text: #e5e7eb;
-      --muted: #9aa1aa;
-      --accent: #f5d259;
-      --border: #232833;
-      --shadow: rgba(0,0,0,0.35);
+    :root{
+      --bg:#0f1115; --panel:#171a21; --ink:#e6e7eb; --muted:#98a2b3; --line:#242833; --accent:#71f4c8;
+      --max: 820px;
     }
-    [data-theme="light"] {
-      --bg: #f7f7f9;
-      --card: #ffffff;
-      --text: #0f1115;
-      --muted: #5a6572;
-      --accent: #f5d259;
-      --border: #e5e7eb;
-      --shadow: rgba(0,0,0,0.08);
-    }
-
-    html, body { height: 100%; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, "Malgun Gothic", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    .container { max-width: 980px; margin: 0 auto; padding: 20px; }
-
-    /* ===== HEADER (sticky) ===== */
-    header {
-      position: sticky; top: 0; z-index: 10;
-      backdrop-filter: blur(8px);
-      background: color-mix(in srgb, var(--bg) 70%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    header .inner {
-      max-width: 980px; margin: 0 auto; padding: 10px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      flex-wrap: wrap;
-    }
-
-    /* Theme toggle */
-    .toggle-group { display:flex; align-items:center; gap:10px; }
-    .toggle-label { color: var(--muted); font-size: 14px; white-space: nowrap; }
-    .btn {
-      appearance: none; border: 1px solid var(--border); background: var(--card);
-      color: var(--text); border-radius: 999px; padding: 8px 12px; cursor: pointer; font-weight: 600;
-      box-shadow: 0 6px 16px var(--shadow);
-    }
-
-    /* ===== YOUTUBE (smaller, centered) ===== */
-    .iframe-shell { display:flex; justify-content:center; flex: 1 1 100%; order: -1; }
-    .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 420px;               /* smaller player */
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px var(--shadow);
-      background: #000;
-    }
-    .iframe-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-
-    /* ===== CARD ===== */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px 28px;
-      box-shadow: 0 10px 30px var(--shadow);
-      margin-top: 16px;
-    }
-    .subtitle { color: var(--muted); margin: 0 0 6px; font-size: 14px; text-align: center; }
-    .title { font-size: 26px; line-height: 1.25; margin: 6px 0 10px; text-align: center; }
-
-    /* ===== POEM LAYOUT (centered lines) ===== */
-    .poem {
-      max-width: 600px;               /* generous side margins */
-      margin: 0 auto;
-      padding: 0 8px;
-      line-height: 2.15;
-      font-size: 18px;
-      letter-spacing: 0.1px;
-      word-break: keep-all;
-      text-align: center;             /* center align each line */
-    }
-    .poem p { margin: 12px 0; }
-
-    .separator {
-      margin: 18px auto;
-      height: 1px; width: 60%;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-    }
-
-    .note { color: var(--muted); font-size: 13px; }
-
-    .footer {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .container { padding: 16px; }
-      .card { padding: 26px 20px; }
-      .title { font-size: 22px; }
-      .poem { max-width: 520px; font-size: 17px; line-height: 2.05; }
-      .separator { width: 72%; }
-    }
-    @media (max-width: 420px) {
-      .poem { max-width: 92vw; font-size: 16.5px; line-height: 2.0; }
-      .iframe-wrapper { max-width: 92vw; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",Pretendard,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.8}
+    .wrap{max-width:var(--max);margin:auto;padding:24px}
+    header{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;margin-bottom:14px}
+    .toggle{margin-left:auto;display:flex;align-items:center;gap:8px;cursor:pointer}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 6px}
+    .yt{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:18px}
+    .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    h1{font-size:clamp(20px,4.2vw,28px);margin:0 0 8px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:16px}
+    hr{border:0;border-top:1px solid var(--line);margin:16px 0}
+    .lyric{white-space:pre-wrap;font-size:clamp(15px,3.6vw,17px);letter-spacing:.1px}
+    .sep{display:block;text-align:center;color:var(--muted);margin:10px 0}
+    footer{color:var(--muted);font-size:12px;margin:18px 0 4px;text-align:center}
+    /* light mode */
+    .light{--bg:#faf7f1;--panel:#ffffff;--ink:#111;--muted:#475569;--line:#e7e5e4}
+    .light .yt{background:#111}
   </style>
 </head>
 <body>
-  <header aria-label="상단 영역">
-    <div class="inner">
-      <!-- Right-side controls -->
-      <div class="toggle-group" aria-label="테마 밝기 조절">
-        <span class="toggle-label">밝기 조절</span>
-        <button id="themeToggle" class="btn" aria-label="테마 전환">🌙 다크</button>
+  <div class="wrap">
+    <header>
+      <strong>밝기 조절</strong>
+      <div class="toggle" id="modeToggle" aria-label="밝기 전환">
+        <span>다크</span>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="yt">
+        <!-- YouTube: https://www.youtube.com/watch?v=qYcoJpqCha4 -->
+        <iframe src="https://www.youtube.com/embed/qYcoJpqCha4"
+                title="My Soul" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
       </div>
 
-      <!-- Centered small YouTube player -->
-      <div class="iframe-shell">
-        <div class="iframe-wrapper" aria-label="YouTube 플레이어: My Soul - The Cancel">
-          <iframe
-            src="https://www.youtube.com/embed/Ln4lwQAP3wM"
-            title="My Soul - The Cancel — YouTube player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            referrerpolicy="strict-origin-when-cross-origin">
-          </iframe>
-        </div>
+      <h1>Live Anywhere</h1>
+      <div class="meta">Mashcore · 에세이</div>
+
+      <div class="lyric">
+어디서 사느냐는 정말 중요하다.
+한 지역이 어떤 사람들을 끌어들이는지, 그로 인해 어떤 상권이 생기고, 
+다시 어떤 사람들이 모여 사는지. 이 반복적인 상호작용이 결국 삶의 방향을 만들어낸다.
+
+내 집이 높은 곳에 있는지, 낮은 곳에 있는지. 창밖의 시야가 트여 있는지, 막혀 있는지.
+이런 환경은 내가 무엇을 보고, 듣고, 느끼는지를 결정한다. 
+그리고 그 경험이 곧 내 생각이 되고, 나의 행동이 된다.
+“주변에 어떤 사람을 두느냐가 본인을 결정한다”는 말과 일맥상통한다.
+
+나는 최근까지 노량진의 2층 빌라에 살았다. 
+창밖에는 항상 앞 빌라가 내 시야를 가로막고 있었고,
+옥상에 올라가야만 겨우 탁 트인 하늘을 볼 수 있었다. 
+하지만 그마저도 마음의 여유가 없어서 자주 올라가지는 못했다.
+
+─
+
+지금은 영등포의 11층 건물에 살고 있다. 늘 탁 트인 뷰가 펼쳐지고, 
+그 덕에 내 생각도 훨씬 넓어졌다. 시야가 열리니 마음도 열린다.
+
+자본주의 사회에서 우리는 흔히 돈에만 매달린다. 
+몇 푼 아끼려다 정작 중요한 나 자신을 위한 투자는 미루곤 한다. 
+나 역시 그랬다. 하지만 이제는 다르게 생각한다.
+
+│
+
+많은 부자들이 높은 곳에서 산다. 단순히 전망이 좋아서가 아니다.
+인생의 전망까지 넓히기 위한 첫 단추이기 때문이다. 
+부자가 태어나서 부자로 사는 경우는 드물다.
+설령 태어날 때부터 부자였다 해도, 그 부를 유지하는 건 결국 생각과 습관이다.
+
+나는 최근 깨달았다.
+중요한 건 유물론, 관념론 같은 어려운 개념이 아니다.
+행동하는 습관, 그리고 그것을 지속할 수 있는 환경을 만드는 것이다.
+
+탁 트인 뷰를 얻고 나서 나는 바뀌었다. 인생의 목표를 더 선명히 정했다.
+환경이 바뀌면, 생각이 바뀌고, 결국 내가 바뀐다.
       </div>
+
+      <hr/>
+      <footer>© Mashcore</footer>
     </div>
-  </header>
-
-  <main class="container" role="main">
-    <article class="card" aria-label="읽을 수 있는 본문">
-      <p class="subtitle">에세이</p>
-      <h1 class="title">첫인상, 개인에서 도시까지</h1>
-
-      <div class="poem" id="article">
-        <p>인천공항에 다녀왔습니다.</p>
-        <p>오는길에 이런 생각이 들더군요.</p>
-        <p>인천 → 서울 방향의 영종대교를 건너오니</p>
-        <p>건너편에 청라지구가 보이더군요.</p>
-
-        <p>청라지구는 왜 만들어진 걸까.</p>
-        <p>송도와 청라는 유령도시라는 이야기가 자자하던데.</p>
-
-        <div class="separator" role="separator" aria-hidden="true"></div>
-
-        <p>매번 생각했습니다.</p>
-        <p>“첫인상이 얼마나 중요한지”에 대하여.</p>
-
-        <p>외모를 가꾸고</p>
-        <p>목소리를 다듬고</p>
-        <p>향을 바꾸는데</p>
-        <p>담배꽁초는 왜 바닥에 버리는지</p>
-
-        <div class="separator" role="separator" aria-hidden="true"></div>
-
-        <p>외국인들이 보았을 때 한국은,</p>
-        <p>인천공항의 깔끔함부터 시작하여,</p>
-        <p>청라와 같은 대교를 지나며 보이는 첫 도시에 의해</p>
-        <p>결정되겠구나.</p>
-
-        <p>나는 과연 내가 살고 있는</p>
-        <p>이곳 대한민국의 어떤 인상에 기여할까.</p>
-        <p>우리 집은 타인에게 어떻게 보일까.</p>
-        <p>내가 뭘 하면 매력적인 사람으로 보일까.</p>
-        <p>내 마음속은 어떤 상태일까.</p>
-
-        <div class="separator" role="separator" aria-hidden="true"></div>
-
-        <p>제가 내린 결론은 이겁니다.</p>
-        <p>“깔끔한 사람.”</p>
-        <p>정리하고, 갈고 닦고.</p>
-
-        <div class="separator" role="separator" aria-hidden="true"></div>
-
-        <p>사실은 실패를 위해 만들어진 곳,</p>
-        <p>대한민국의 첫 인상을 위한 곳이 “청라”구나.</p>
-        <p>이런 생각을 했습니다.</p>
-        <p>그 목적에 알맞게 ‘성공’한 지역이</p>
-        <p>청라지구라고 생각합니다.</p>
-
-        <div class="separator" role="separator" aria-hidden="true"></div>
-
-        <p>만약 ‘실패’라는 단어에 감정적 동요로</p>
-        <p>글을 읽어봐야지 마음먹고선</p>
-        <p>끝까지 읽고 계시다면,</p>
-        <p>한번 본인이 어떤 기준을 살아가고 계신지</p>
-        <p>생각해보면 좋겠습니다.</p>
-
-        <p>“본인이 선택하는 게 모두</p>
-        <p>내가 내린 선택이라고</p>
-        <p>확신할 수 있는가.”</p>
-      </div>
-    </article>
-
-    <section class="card footer" aria-label="바닥글">
-      <div class="note">© WePlaceMarketing</div>
-      <div class="note">배경 음악: <strong>My Soul – The Cancel</strong> (YouTube 임베드)</div>
-    </section>
-  </main>
+  </div>
 
   <script>
-    // Theme toggle with localStorage
+    // 라이트/다크 토글
+    const toggle = document.getElementById('modeToggle');
     const root = document.documentElement;
-    const toggle = document.getElementById('themeToggle');
-    const KEY = 'wpm-theme';
-    const saved = localStorage.getItem(KEY);
-    if (saved === 'light' || saved === 'dark') {
-      root.setAttribute('data-theme', saved);
-      toggle.textContent = saved === 'dark' ? '🌙 다크' : '☀️ 라이트';
-    }
-    toggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      const next = current === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem(KEY, next);
-      toggle.textContent = next === 'dark' ? '🌙 다크' : '☀️ 라이트';
-    });
+    const apply = m => { document.body.classList.toggle('light', m==='light');
+                         toggle.querySelector('span').textContent = m==='light' ? '라이트' : '다크';
+                         localStorage.setItem('mode', m); };
+    apply(localStorage.getItem('mode') || 'dark');
+    toggle.addEventListener('click', () => apply(document.body.classList.contains('light') ? 'dark' : 'light'));
   </script>
 </body>
 </html>
