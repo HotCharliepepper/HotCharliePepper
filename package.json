@@ -1,0 +1,8 @@
+{
+  "name": "wknd-bokjori-event",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^10.4.1"
+  }
+}
