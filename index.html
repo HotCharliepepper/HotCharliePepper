@@ -3,105 +3,155 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Live Anywhere — Mashcore</title>
-  <meta name="description" content="어디서 사느냐는 정말 중요하다. 환경이 바뀌면 생각이 바뀌고, 결국 내가 바뀐다." />
+  <title>WKND 복조리 깜짝 이벤트</title>
   <style>
-    :root{
-      --bg:#0f1115; --panel:#171a21; --ink:#e6e7eb; --muted:#98a2b3; --line:#242833; --accent:#71f4c8;
-      --max: 820px;
+    :root { --bg:#0b0b0f; --card:#12121a; --txt:#f3f3f6; --mut:#b8b8c6; --line:#2a2a39; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      background: radial-gradient(80rem 40rem at 50% -10%, #2a1a00 0%, rgba(0,0,0,0) 55%), var(--bg);
+      color:var(--txt);
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",Pretendard,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.8}
-    .wrap{max-width:var(--max);margin:auto;padding:24px}
-    header{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;margin-bottom:14px}
-    .toggle{margin-left:auto;display:flex;align-items:center;gap:8px;cursor:pointer}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 6px}
-    .yt{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:18px}
-    .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-    h1{font-size:clamp(20px,4.2vw,28px);margin:0 0 8px}
-    .meta{color:var(--muted);font-size:13px;margin-bottom:16px}
-    hr{border:0;border-top:1px solid var(--line);margin:16px 0}
-    .lyric{white-space:pre-wrap;font-size:clamp(15px,3.6vw,17px);letter-spacing:.1px}
-    .sep{display:block;text-align:center;color:var(--muted);margin:10px 0}
-    footer{color:var(--muted);font-size:12px;margin:18px 0 4px;text-align:center}
-    /* light mode */
-    .light{--bg:#faf7f1;--panel:#ffffff;--ink:#111;--muted:#475569;--line:#e7e5e4}
-    .light .yt{background:#111}
+    .wrap { max-width:880px; margin:0 auto; padding:28px 16px 56px; }
+    .badge { display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border:1px solid var(--line); border-radius:999px; color:var(--mut); }
+    h1 { margin:14px 0 8px; font-size:28px; letter-spacing:-0.3px; }
+    p { margin:0; color:var(--mut); line-height:1.6; }
+    .grid { display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px; }
+    @media (min-width:900px){ .grid{ grid-template-columns: 1.2fr 0.8fr; } }
+    .card { background:rgba(18,18,26,0.82); border:1px solid var(--line); border-radius:18px; padding:18px; backdrop-filter: blur(8px); }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .sep { height:1px; background:var(--line); margin:14px 0; }
+    .big { font-size:18px; color:var(--txt); }
+    .mut { color:var(--mut); }
+    .pill { padding:6px 10px; border:1px dashed var(--line); border-radius:999px; color:var(--mut); font-size:13px; }
+    input { width:100%; padding:12px 12px; border-radius:12px; border:1px solid var(--line); background:#0f0f16; color:var(--txt); }
+    button { width:100%; padding:12px 14px; border-radius:12px; border:1px solid #3a2a0a; background:linear-gradient(180deg,#ffcc66 0%, #c98b1a 100%);
+      color:#1a1200; font-weight:800; cursor:pointer;
+    }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+    .result { padding:12px; border-radius:14px; border:1px solid var(--line); background:#0f0f16; white-space:pre-line; }
+    .tiny { font-size:12px; color:#8f8fa3; line-height:1.5; }
+    .count { font-variant-numeric: tabular-nums; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <strong>밝기 조절</strong>
-      <div class="toggle" id="modeToggle" aria-label="밝기 전환">
-        <span>다크</span>
-      </div>
-    </header>
+    <div class="badge">🧧 WKNDMOOD × Mashcore · 복조리 깜짝 이벤트</div>
+    <h1>일요일 하루, 선착순으로 “복(혜택)”을 가져가세요.</h1>
+    <p>이벤트 오픈 시간에 <b>복조리 열기</b> 버튼이 활성화됩니다. 남은 수량이 보이는 순간, 이미 반은 성공입니다.</p>
 
-    <div class="card">
-      <div class="yt">
-        <!-- YouTube: https://www.youtube.com/watch?v=qYcoJpqCha4 -->
-        <iframe src="https://www.youtube.com/embed/qYcoJpqCha4"
-                title="My Soul" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-      </div>
+    <div class="grid">
+      <div class="card">
+        <div class="row">
+          <div class="pill">남은 복(재고)</div>
+          <div id="remain" class="mut count">불러오는 중…</div>
+        </div>
+        <div class="sep"></div>
 
-      <h1>Live Anywhere</h1>
-      <div class="meta">Mashcore · 에세이</div>
+        <div class="row" style="align-items:flex-start;">
+          <div style="flex:1; min-width:240px;">
+            <div class="big">닉네임(오픈톡 이름)만 적고 참여</div>
+            <div class="tiny">※ 중복 수령 방지를 위해 서버에서 IP 기반 “1회 클레임”을 기본 적용합니다(완벽하진 않지만 실전에서 꽤 잘 막습니다). :contentReference[oaicite:3]{index=3}</div>
+            <div style="height:10px"></div>
+            <input id="nickname" maxlength="20" placeholder="예) 규현 / Charlie / Mashcore" />
+            <div style="height:10px"></div>
+            <button id="btn" disabled>복조리 열기 🧧</button>
+          </div>
 
-      <div class="lyric">
-어디서 사느냐는 정말 중요하다.
-한 지역이 어떤 사람들을 끌어들이는지, 그로 인해 어떤 상권이 생기고, 
-다시 어떤 사람들이 모여 사는지. 이 반복적인 상호작용이 결국 삶의 방향을 만들어낸다.
-
-내 집이 높은 곳에 있는지, 낮은 곳에 있는지. 창밖의 시야가 트여 있는지, 막혀 있는지.
-이런 환경은 내가 무엇을 보고, 듣고, 느끼는지를 결정한다. 
-그리고 그 경험이 곧 내 생각이 되고, 나의 행동이 된다.
-“주변에 어떤 사람을 두느냐가 본인을 결정한다”는 말과 일맥상통한다.
-
-나는 최근까지 노량진의 2층 빌라에 살았다. 
-창밖에는 항상 앞 빌라가 내 시야를 가로막고 있었고,
-옥상에 올라가야만 겨우 탁 트인 하늘을 볼 수 있었다. 
-하지만 그마저도 마음의 여유가 없어서 자주 올라가지는 못했다.
-
-─
-
-지금은 영등포의 11층 건물에 살고 있다. 늘 탁 트인 뷰가 펼쳐지고, 
-그 덕에 내 생각도 훨씬 넓어졌다. 시야가 열리니 마음도 열린다.
-
-자본주의 사회에서 우리는 흔히 돈에만 매달린다. 
-몇 푼 아끼려다 정작 중요한 나 자신을 위한 투자는 미루곤 한다. 
-나 역시 그랬다. 하지만 이제는 다르게 생각한다.
-
-│
-
-많은 부자들이 높은 곳에서 산다. 단순히 전망이 좋아서가 아니다.
-인생의 전망까지 넓히기 위한 첫 단추이기 때문이다. 
-부자가 태어나서 부자로 사는 경우는 드물다.
-설령 태어날 때부터 부자였다 해도, 그 부를 유지하는 건 결국 생각과 습관이다.
-
-나는 최근 깨달았다.
-중요한 건 유물론, 관념론 같은 어려운 개념이 아니다.
-행동하는 습관, 그리고 그것을 지속할 수 있는 환경을 만드는 것이다.
-
-탁 트인 뷰를 얻고 나서 나는 바뀌었다. 인생의 목표를 더 선명히 정했다.
-환경이 바뀌면, 생각이 바뀌고, 결국 내가 바뀐다.
+          <div style="flex:1; min-width:240px;">
+            <div class="big">안내</div>
+            <div class="tiny">
+              1) 당첨되면 <b>클레임 코드</b>가 나옵니다.<br/>
+              2) 그 화면을 캡처해서 운영자에게 보내면 혜택 확정.<br/>
+              3) 소진되면 참가상 메시지로 전환됩니다.
+            </div>
+            <div class="sep"></div>
+            <div id="status" class="result">이벤트 상태 확인 중…</div>
+          </div>
+        </div>
       </div>
 
-      <hr/>
-      <footer>© Mashcore</footer>
+      <div class="card">
+        <div class="big">경품(예시)</div>
+        <div class="sep"></div>
+        <div class="tiny">
+          🥇 1복(초레어) : 10만원권/할인 (1명)<br/>
+          🥈 2복(레어) : 3만원권/30% 할인 (3명)<br/>
+          🥉 3복(기본) : 1만원권/10% 할인 (10명)<br/>
+          🎁 참가상 : 인상 정돈 체크리스트 + 다음 행사 우선 알림
+        </div>
+        <div class="sep"></div>
+        <div class="tiny">
+          운영 팁: “복조리 오픈” 문구를 오픈톡 상단 공지로 걸고,<br/>
+          오픈 시간 10분 전부터 <b>카운트다운</b> 안내하면 참여율이 훅 올라갑니다.
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // 라이트/다크 토글
-    const toggle = document.getElementById('modeToggle');
-    const root = document.documentElement;
-    const apply = m => { document.body.classList.toggle('light', m==='light');
-                         toggle.querySelector('span').textContent = m==='light' ? '라이트' : '다크';
-                         localStorage.setItem('mode', m); };
-    apply(localStorage.getItem('mode') || 'dark');
-    toggle.addEventListener('click', () => apply(document.body.classList.contains('light') ? 'dark' : 'light'));
+    const $remain = document.getElementById('remain');
+    const $btn = document.getElementById('btn');
+    const $status = document.getElementById('status');
+    const $nickname = document.getElementById('nickname');
+
+    async function refreshStatus(){
+      const res = await fetch('/api/status', { cache: 'no-store' });
+      const data = await res.json();
+
+      const remainText = `1복:${data.remaining.p1} · 2복:${data.remaining.p2} · 3복:${data.remaining.p3} (총 ${data.remaining.total})`;
+      $remain.textContent = remainText;
+
+      if (!data.isOpen) {
+        $btn.disabled = true;
+        $status.textContent =
+          `⏳ 아직 오픈 전입니다.\n오픈: ${data.window.startKST}\n마감: ${data.window.endKST}\n\n지금은 대기 모드입니다. 오픈되면 버튼이 활성화됩니다.`;
+        return;
+      }
+
+      $btn.disabled = false;
+      $status.textContent = `✅ 지금 오픈 중!\n남은 복이 보이는 지금이 타이밍입니다.\n\n(소진 시 자동으로 참가상으로 전환됩니다.)`;
+    }
+
+    async function claim(){
+      const nickname = ($nickname.value || '').trim();
+      if (!nickname) {
+        $status.textContent = '닉네임을 입력해 주세요 🙂';
+        return;
+      }
+
+      $btn.disabled = true;
+      $status.textContent = '복조리 여는 중…(서버 확인 중)';
+
+      try {
+        const res = await fetch('/api/claim', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ nickname })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          $status.textContent = `⚠️ ${data.message || '처리 중 오류가 발생했습니다.'}`;
+        } else {
+          if (data.prize.type === 'NONE') {
+            $status.textContent =
+              `😅 아쉽게도 오늘의 복(경품)은 모두 소진!\n\n그래도 참가상은 드립니다:\n${data.prize.label}\n\n다음 이벤트 우선 알림도 같이 받을 수 있어요.`;
+          } else {
+            $status.textContent =
+              `🎉 축하합니다! 당신의 복(혜택)은:\n${data.prize.label}\n\n클레임 코드: ${data.claimCode}\n\n이 화면 캡처 → 운영자에게 보내면 혜택 확정!`;
+          }
+        }
+      } catch (e) {
+        $status.textContent = '네트워크 오류… 잠시 후 다시 시도해 주세요.';
+      } finally {
+        await refreshStatus();
+      }
+    }
+
+    $btn.addEventListener('click', claim);
+    refreshStatus();
+    setInterval(refreshStatus, 6000);
   </script>
 </body>
 </html>
