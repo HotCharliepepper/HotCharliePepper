@@ -95,7 +95,8 @@
     const $nickname = document.getElementById('nickname');
 
     async function refreshStatus(){
-      const res = await fetch('/api/status', { cache: 'no-store' });
+      const res = await fetch('/.netlify/functions/status', { cache: 'no-store' })
+fetch('/.netlify/functions/claim', { method: 'POST', ... })
       const data = await res.json();
 
       const remainText = `1복:${data.remaining.p1} · 2복:${data.remaining.p2} · 3복:${data.remaining.p3} (총 ${data.remaining.total})`;
@@ -155,4 +156,5 @@
   </script>
 </body>
 </html>
+
 
