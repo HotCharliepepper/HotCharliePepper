@@ -18,8 +18,8 @@ function getWindow() {
   const endRaw   = (globalThis.Netlify?.env?.get("WKND_EVENT_END") || "").trim();
 
   // 예시 기본값: 일요일 하루 (원하는 날짜로 ENV에서 바꾸면 됨)
-  const start = startRaw ? new Date(startRaw) : new Date("2026-02-15T00:00:00+09:00");
-  const end   = endRaw   ? new Date(endRaw)   : new Date("2026-02-17T23:59:59+09:00");
+  const start = startRaw ? new Date(startRaw) : new Date("2026-02-18T18:00:00+09:00");
+  const end   = endRaw   ? new Date(endRaw)   : new Date("2026-02-20T23:59:59+09:00");
   return { start, end };
 }
 
