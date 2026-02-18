@@ -9,7 +9,7 @@ const store = getStore({ name: STORE_NAME, consistency: "strong" }); // strong ê
 function getWindow() {
   const startRaw = (globalThis.Netlify?.env?.get("WKND_EVENT_START") || "").trim();
   const endRaw   = (globalThis.Netlify?.env?.get("WKND_EVENT_END") || "").trim();
-  const start = startRaw ? new Date(startRaw) : new Date("2026-02-18T18:00:00+09:00");
+  const start = startRaw ? new Date(startRaw) : new Date("2026-02-18T15:16:00+09:00");
   const end   = endRaw   ? new Date(endRaw)   : new Date("2026-02-21T23:59:59+09:00");
   return { start, end };
 }
